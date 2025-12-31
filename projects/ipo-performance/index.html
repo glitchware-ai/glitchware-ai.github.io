@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 IPO Performance Visualization</title>
+    <meta name="description"
+        content="Interactive visualization of 2025 IPO performance showing percentage gains, CMP, and All-Time Highs.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-top">
+                <div class="header-content">
+                    <div class="header-titles">
+                        <h1>IPO Performance <span class="accent"> 2025</span></h1>
+                        <p class="subtitle">Listing and Listing-to-End-of-Year gains of 2025 IPOs. Last updated: 31 Dec
+                            2025 </p>
+                    </div>
+                </div>
+                <div class="header-right-meta">
+                    <div class="glitchware-credit">
+                        <p>Data visualization by <span class="pixel-text"><a href="../../index.html"
+                                    class="back-link">Glitchware.ai</a></span></p>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/@glitchware-ai" target="_blank"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/glitchware_ai/" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://x.com/glitchware_ai" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="view-selector">
+                    <button class="selector-btn active" data-metric="ytd">Listing-to-EoY Gains</button>
+                    <button class="selector-btn" data-metric="listing">Listing Gains</button>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="swatch green"></span>
+                        <span>Positive Gain</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="swatch red"></span>
+                        <span>Negative Gain</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="swatch high"></span>
+                        <span>Highest/lowest price since listing</span>
+                    </div>
+                </div>
+                <!-- <button id="download-btn" class="primary-btn">
+                    <i class="fas fa-camera"></i> Export as Image
+                </button> -->
+            </div>
+
+            <div id="stats-dashboard" class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Total IPOs in 2025</span>
+                    <span id="stat-total" class="stat-value">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Positive Gainers</span>
+                    <span id="stat-positive" class="stat-value gain">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Negative Gainers</span>
+                    <span id="stat-negative" class="stat-value loss">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Flat</span>
+                    <span id="stat-flat" class="stat-value">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Top Gainer</span>
+                    <span id="stat-top-gainer" class="stat-value small">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Top Loser</span>
+                    <span id="stat-top-loser" class="stat-value small">-</span>
+                </div>
+            </div>
+
+
+            <div id="timeline-container" class="timeline-visual">
+                <h3>IPO Distribution by Month</h3>
+                <div id="timeline-chart"></div>
+            </div>
+
+
+        </header>
+
+        <main id="chart-container">
+            <div class="top-controls">
+                <h3>IPO Distribution by Gains</h3>
+                <div class="controls-bar">
+                    <div class="sort-control">
+                        <label for="sort-select">Sort By:</label>
+                        <select id="sort-select">
+                            <option value="date-desc">Newest Listing (Default)</option>
+                            <option value="date-asc">Oldest Listing</option>
+                            <option value="gain-desc">Highest Gain</option>
+                            <option value="gain-asc">Lowest Gain</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="chart"></div>
+        </main>
+
+        <div id="tooltip" class="hidden">
+            <div class="tooltip-header">
+                <span id="tt-symbol">SYMBOL</span>
+                <span id="tt-date">Date</span>
+            </div>
+            <div class="tooltip-body">
+                <div class="tt-row">
+                    <span class="label">Issue Price</span>
+                    <span id="tt-issue" class="value">0.00</span>
+                </div>
+                <div class="tt-row">
+                    <span id="tt-cmp-label" class="label">CMP</span>
+                    <span id="tt-cmp" class="value">0.00</span>
+                </div>
+                <div class="tt-row">
+                    <span class="label">Gain / Loss</span>
+                    <span id="tt-gain" class="value">0.00%</span>
+                </div>
+                <div class="tt-row">
+                    <span class="label">All Time High</span>
+                    <span id="tt-ath" class="value">0.00</span>
+                </div>
+                <div class="tt-row">
+                    <span class="label">ATH Gain</span>
+                    <span id="tt-ath-gain" class="value">0.00%</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p>Data visualization by <span class="pixel-text"><a href="../../index.html"
+                            class="back-link">Glitchware.ai</a></span></p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@glitchware-ai" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/glitchware_ai/" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/glitchware_ai" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
