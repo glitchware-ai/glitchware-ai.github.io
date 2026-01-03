@@ -1,0 +1,331 @@
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent: #4f46e5;
+    --accent-glow: rgba(79, 70, 229, 0.15);
+    --border-color: #e2e8f0;
+    --font-main: 'Outfit', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-pixel: 'Press Start 2P', cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.background-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+header {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+
+.header-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header-titles h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #0f172a, #475569);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.accent {
+    color: var(--accent);
+    -webkit-text-fill-color: initial;
+    background: none;
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+.header-titles {
+    text-align: left;
+}
+
+.header-right-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: auto;
+    /* Push to the extreme right */
+}
+
+.glitchware-credit {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.glitchware-credit p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pixel-text {
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--accent);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.chart-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0rem;
+}
+
+.column-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+#chart {
+    width: 100%;
+    height: 500px;
+}
+
+.insights {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.insight-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.insight-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.insight-card .icon {
+    font-size: 2rem;
+    background: var(--card-bg);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+}
+
+.insight-card h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.insight-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.insight-card span {
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    font-size: 0.85rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    transition: opacity 0.2s;
+}
+
+.tooltip-title {
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.tooltip-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* D3 Elements Styling */
+.node rect {
+    fill-opacity: 0.8;
+}
+
+.node text {
+    fill: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.link {
+    fill-opacity: 0.2;
+    transition: fill-opacity 0.3s;
+}
+
+.link:hover {
+    fill-opacity: 0.6;
+}

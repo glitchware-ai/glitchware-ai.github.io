@@ -1,0 +1,7 @@
+Turnover range,Share in turnover,Share in investors
+"<= Rs 10,000",0.03,32
+"Rs 10,000 - Rs 1 lakh",0.4,38
+Rs 1 lakh - Rs 10 lakh,2,21
+Rs 10 lakh - Rs 1 crore,7,7
+Rs 1 crore - Rs 10 crore,13,1.5
+> Rs 10 crore,78,0.2

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Turnover Concentration | Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="container">
+        <header>
+
+            <div class="header-top">
+                <div class="header-content">
+                    <div class="header-titles">
+                        <h1>Trading <span class="accent">Concentration</span></h1>
+                        <p class="subtitle">Visualizing the disproportionate contribution to market turnover across
+                            investor segments.</p>
+                    </div>
+                </div>
+                <div class="header-right-meta">
+                    <div class="glitchware-credit">
+                        <p>Data visualization by <span class="pixel-text"><a href="../../index.html"
+                                    class="back-link">Glitchware.ai</a></span></p>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/@glitchware-ai" target="_blank"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/glitchware_ai/" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://x.com/glitchware_ai" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="chart-wrapper">
+            <div class="chart-header">
+                <div class="column-label">Share in Investors (%)</div>
+                <div class="column-label">Share in Turnover (%)</div>
+            </div>
+            <div id="chart"></div>
+        </div>
+
+        <section class="insights">
+            <div class="insight-card" id="key-finding">
+                <div class="icon">📊</div>
+                <div class="content">
+                    <h3>Key Insight</h3>
+                    <p>The top <span id="top-investors-pct">0.2%</span> of traders contribute a staggering <span
+                            id="top-turnover-pct">78%</span> of the total trading turnover.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>Data Source: NSE Market Pulse Report for Nov 2025</p>
+                <div class="glitchware-credit">
+                    <p>Designed by <span class="pixel-text"><a href="../../index.html"
+                                class="back-link">Glitchware.ai</a></span></p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@glitchware-ai" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/glitchware_ai/" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/glitchware_ai" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
